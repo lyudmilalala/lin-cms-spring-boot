@@ -32,7 +32,10 @@ public class UserPermissionVO {
     }
 
     public UserPermissionVO(UserDO userDO, List<Map<String, List<Map<String, String>>>> permissions) {
-        BeanUtils.copyProperties(userDO, this);
+        this.id = userDO.getId();
+        this.nickname = userDO.getNickname();
+        this.avatar = userDO.getAvatar();
+        this.email = userDO.getEmail();
         this.permissions = permissions;
     }
 

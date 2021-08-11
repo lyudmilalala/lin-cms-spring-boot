@@ -22,6 +22,7 @@ import io.github.talelin.latticy.vo.CreatedVO;
 import io.github.talelin.latticy.vo.UpdatedVO;
 import io.github.talelin.latticy.vo.UserInfoVO;
 import io.github.talelin.latticy.vo.UserPermissionVO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -38,6 +40,7 @@ import java.util.Map;
  * @author pedro@TaleLin
  * @author Juzi@TaleLin
  */
+@Slf4j
 @RestController
 @RequestMapping("/cms/user")
 @PermissionModule(value = "用户")
@@ -70,7 +73,8 @@ public class UserController {
      * 用户登陆
      */
     @PostMapping("/login")
-    public Tokens login(@RequestBody @Validated LoginDTO validator) {
+    public Tokens login(@RequestBody @Validated LoginDTO validator, HttpServletRequest request) {
+        log.info("Cur session id = " + request.getSession().getId());
         UserDO user = userService.getUserByUsername(validator.getUsername());
         if (user == null) {
             throw new NotFoundException(10021);
@@ -120,10 +124,19 @@ public class UserController {
      */
     @GetMapping("/permissions")
     @LoginRequired
-    public UserPermissionVO getPermissions() {
+    public UserPermissionVO getPermissions(HttpServletRequest request) {
+        log.info("Cur session id = " + request.getSession().getId());
         UserDO user = LocalUser.getLocalUser();
-        boolean admin = groupService.checkIsRootByUserId(user.getId());
-        List<Map<String, List<Map<String, String>>>> permissions = userService.getStructuralUserPermissions(user.getId());
+        log.info("User = " + user);
+        boolean admin = false;
+        List<Map<String, List<Map<String, String>>>> permissions = null;
+        if (user == null || user.getId() == null) {
+            permissions = userService.getStructuralUserPermissions(1);
+        } else {
+            admin = groupService.checkIsRootByUserId(user.getId());
+            permissions = userService.getStructuralUserPermissions(user.getId());
+        }
+        log.info("User after select = " + user);
         UserPermissionVO userPermissions = new UserPermissionVO(user, permissions);
         userPermissions.setAdmin(admin);
         return userPermissions;

@@ -1,6 +1,8 @@
 #开发环境配置
 
 server:
+  # 服务IP
+  address: 0.0.0.0
   # 服务端口
   port: 5000
 
@@ -9,9 +11,9 @@ spring:
   # 数据源配置，请修改为你项目的实际配置
   datasource:
     username: "root"
-    password: "123456"
+    password: "1AmP@ssw0rd"
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/lin-cms?useSSL=false&serverTimezone=UTC&characterEncoding=UTF8
+    url: jdbc:mysql://localhost:3306/qmlab_dev?useSSL=false&serverTimezone=Asia/Shanghai&autoReconnect=true&characterEncoding=UTF8
 
 
 # 开启权限拦截
@@ -21,7 +23,7 @@ auth:
 
 # 开启http请求日志记录
 request-log:
-  enabled: true
+  enabled: false
 
 
 logging:

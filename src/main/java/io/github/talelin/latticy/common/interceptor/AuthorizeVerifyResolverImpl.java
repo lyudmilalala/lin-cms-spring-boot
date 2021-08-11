@@ -18,6 +18,7 @@ import io.github.talelin.latticy.model.PermissionDO;
 import io.github.talelin.latticy.model.UserDO;
 import io.github.talelin.latticy.service.GroupService;
 import io.github.talelin.latticy.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,6 +34,7 @@ import java.util.regex.Pattern;
  * @author pedro@TaleLin
  * @author Juzi@TaleLin
  */
+@Slf4j
 @Component
 public class AuthorizeVerifyResolverImpl implements AuthorizeVerifyResolver {
 
@@ -58,6 +60,7 @@ public class AuthorizeVerifyResolverImpl implements AuthorizeVerifyResolver {
 
     @Override
     public boolean handleLogin(HttpServletRequest request, HttpServletResponse response, MetaInfo meta) {
+        log.info("Enter handleLogin");
         String tokenStr = verifyHeader(request, response);
         Map<String, Claim> claims;
         try {
@@ -125,6 +128,7 @@ public class AuthorizeVerifyResolverImpl implements AuthorizeVerifyResolver {
     }
 
     private boolean getClaim(Map<String, Claim> claims) {
+        log.info("Enter getClaim");
         if (claims == null) {
             throw new TokenInvalidException(10041);
         }
@@ -142,6 +146,7 @@ public class AuthorizeVerifyResolverImpl implements AuthorizeVerifyResolver {
             avatarUrl = domain + servePath.split("/")[0] + "/" + user.getAvatar();
         }
         user.setAvatar(avatarUrl);
+        log.info("User before set = "+user);
         LocalUser.setLocalUser(user);
         return true;
     }

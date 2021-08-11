@@ -28,10 +28,10 @@ import java.util.List;
 @Slf4j
 public class WebConfiguration implements WebMvcConfigurer {
 
-    @Value("${auth.enabled:false}")
+    @Value("${auth.enabled}")
     private boolean authEnabled;
 
-    @Value("${request-log.enabled:false}")
+    @Value("${request-log.enabled}")
     private boolean requestLogEnabled;
 
     @Autowired

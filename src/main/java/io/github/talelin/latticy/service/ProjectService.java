@@ -18,5 +18,5 @@ public interface ProjectService {
 
     ProjectDO getProjectById(Integer id);
 
-    boolean deleteProjectById(Integer id);
+    void deleteProjectById(Integer id);
 }

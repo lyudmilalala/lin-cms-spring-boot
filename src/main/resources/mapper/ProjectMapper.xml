@@ -14,6 +14,10 @@
     </resultMap>
 
     <!--CONCAT("%",#{q},"%")-->
+    <select id="selectActive" resultMap="BaseResultMap">
+        SELECT * FROM project p WHERE p.delete_time IS NULL
+    </select>
+
     <select id="selectActiveByTitleLike" resultMap="BaseResultMap">
         SELECT * FROM project p WHERE p.title LIKE %#{searchContent}% AND p.delete_time IS NULL
     </select>
@@ -25,6 +29,11 @@
     <select id="selectActiveByCategoryAndTitleLike" resultMap="BaseResultMap">
         SELECT * FROM project p WHERE p.category=#{category} AND
         p.title LIKE %#{searchContent}% AND p.delete_time IS NULL
+    </select>
+
+    <select id="selectActivePage" resultMap="BaseResultMap">
+        SELECT * FROM project p WHERE p.delete_time IS NULL
+        LIMIT #{pageStartIdx},#{pageSizes}
     </select>
 
     <select id="selectActivePageByTitleLike" resultMap="BaseResultMap">

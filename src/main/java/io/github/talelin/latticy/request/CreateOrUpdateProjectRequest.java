@@ -6,11 +6,19 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class CreateOrUpdateProjectRequest {
+    private Integer id;
     private String title;
     private String content;
     private String category;
 
     public CreateOrUpdateProjectRequest(String title, String content, String category) {
+        this.title = title;
+        this.content = content;
+        this.category = category;
+    }
+
+    public CreateOrUpdateProjectRequest(Integer id, String title, String content, String category) {
+        this.id = id;
         this.title = title;
         this.content = content;
         this.category = category;

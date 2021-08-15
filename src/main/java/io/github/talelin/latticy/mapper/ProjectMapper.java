@@ -13,11 +13,15 @@ import java.util.List;
 @Repository
 public interface ProjectMapper extends BaseMapper<ProjectDO> {
 
+    List<ProjectDO> selectActive();
+
     List<ProjectDO> selectActiveByTitleLike(@Param("searchContent") String searchContent);
 
     List<ProjectDO> selectActiveByCategory(@Param("category") String category);
 
     List<ProjectDO> selectActiveByCategoryAndTitleLike(@Param("category") String category, @Param("searchContent") String searchContent);
+
+    List<ProjectDO> selectActivePage(@Param("pageStartIdx") int pageStartIdx, @Param("pageSize") int pageSize);
 
     List<ProjectDO> selectActivePageByTitleLike(@Param("pageStartIdx") int pageStartIdx, @Param("pageSize") int pageSize, @Param("searchContent") String searchContent);
 

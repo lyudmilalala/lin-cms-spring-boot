@@ -2,6 +2,7 @@ package io.github.talelin.latticy.request;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 @Data
 @NoArgsConstructor

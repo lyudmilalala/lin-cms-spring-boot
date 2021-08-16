@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @author Juzi@TaleLin
  */
 @Data
-@TableName("book")
+@TableName("lin_book")
 @EqualsAndHashCode(callSuper = true)
 public class BookDO extends BaseModel implements Serializable {
 

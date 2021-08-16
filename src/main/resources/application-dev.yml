@@ -11,7 +11,8 @@ spring:
   # 数据源配置，请修改为你项目的实际配置
   datasource:
     username: "root"
-    password: "1AmP@ssw0rd"
+    password: "1996S05y22u!"
+#    password: "1AmP@ssw0rd"
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/qmlab_dev?useSSL=false&serverTimezone=Asia/Shanghai&autoReconnect=true&characterEncoding=UTF8
 

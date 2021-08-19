@@ -15,8 +15,6 @@ public interface ProjectService {
 
     ProjectDO createProject(CreateOrUpdateProjectRequest createOrUpdateProjectRequest);
 
-    List<ProjectDO> getProjectPage2(int pageNum, String category, String searchContent);
-
     IPage getProjectPage(int pageNum, String category, String searchContent);
 
     List<ProjectDO> getProjectList(String category, String searchContent);

@@ -33,40 +33,17 @@
 
     <select id="selectActivePage" resultMap="BaseResultMap">
         SELECT * FROM project p WHERE p.delete_time IS NULL
-        LIMIT #{pageSize} OFFSET #{pageStartIdx}
     </select>
 
     <select id="selectActivePageByTitleLike" resultMap="BaseResultMap">
-        SELECT * FROM project p WHERE p.title LIKE CONCAT("%",#{searchContent},"%") AND
-        p.delete_time IS NULL LIMIT #{pageSize} OFFSET #{pageStartIdx}
-    </select>
-
-    <select id="selectActivePageByCategory" resultMap="BaseResultMap">
-        SELECT * FROM project p WHERE p.category=#{category} AND
-        p.delete_time IS NULL LIMIT #{pageSize} OFFSET #{pageStartIdx}
-    </select>
-
-    <select id="selectActivePageByCategoryAndTitleLike" resultMap="BaseResultMap">
-        SELECT * FROM project p WHERE p.category=#{category} AND
-        p.title LIKE CONCAT("%",#{searchContent},"%") AND p.delete_time IS NULL
-        LIMIT #{pageSize} OFFSET #{pageStartIdx}
-    </select>
-
-
-
-    <select id="selectActivePageByPage" resultMap="BaseResultMap">
-        SELECT * FROM project p WHERE p.delete_time IS NULL
-    </select>
-
-    <select id="selectActivePageByPageAndTitleLike" resultMap="BaseResultMap">
         SELECT * FROM project p WHERE p.title LIKE CONCAT("%",#{searchContent},"%") AND p.delete_time IS NULL
     </select>
 
-    <select id="selectActivePageByPageAndCategory" resultMap="BaseResultMap">
+    <select id="selectActivePageByCategory" resultMap="BaseResultMap">
         SELECT * FROM project p WHERE p.category=#{category} AND p.delete_time IS NULL
     </select>
 
-    <select id="selectActivePageByPageAndCategoryAndTitleLike" resultMap="BaseResultMap">
+    <select id="selectActivePageByCategoryAndTitleLike" resultMap="BaseResultMap">
         SELECT * FROM project p WHERE p.category=#{category} AND
             p.title LIKE CONCAT("%",#{searchContent},"%") AND p.delete_time IS NULL
     </select>

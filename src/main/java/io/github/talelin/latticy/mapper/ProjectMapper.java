@@ -23,19 +23,11 @@ public interface ProjectMapper extends BaseMapper<ProjectDO> {
 
     List<ProjectDO> selectActiveByCategoryAndTitleLike(@Param("category") String category, @Param("searchContent") String searchContent);
 
-    List<ProjectDO> selectActivePage(@Param("pageStartIdx") int pageStartIdx, @Param("pageSize") int pageSize);
+    IPage selectActivePage(Page<ProjectDO> page);
 
-    List<ProjectDO> selectActivePageByTitleLike(@Param("pageStartIdx") int pageStartIdx, @Param("pageSize") int pageSize, @Param("searchContent") String searchContent);
+    IPage selectActivePageByTitleLike(Page<ProjectDO> page, @Param("searchContent") String searchContent);
 
-    List<ProjectDO> selectActivePageByCategory(@Param("pageStartIdx") int pageStartIdx, @Param("pageSize") int pageSize, @Param("category") String category);
+    IPage selectActivePageByCategory(Page<ProjectDO> page, @Param("category") String category);
 
-    List<ProjectDO> selectActivePageByCategoryAndTitleLike(@Param("pageStartIdx") int pageStartIdx, @Param("pageSize") int pageSize, @Param("category") String category, @Param("searchContent") String searchContent);
-
-    IPage selectActivePageByPage(Page<ProjectDO> page);
-
-    IPage selectActivePageByPageAndTitleLike(Page<ProjectDO> page, @Param("searchContent") String searchContent);
-
-    IPage selectActivePageByPageAndCategory(Page<ProjectDO> page, @Param("category") String category);
-
-    IPage selectActivePageByPageAndCategoryAndTitleLike(Page<ProjectDO> page, @Param("category") String category, @Param("searchContent") String searchContent);
+    IPage selectActivePageByCategoryAndTitleLike(Page<ProjectDO> page, @Param("category") String category, @Param("searchContent") String searchContent);
 }

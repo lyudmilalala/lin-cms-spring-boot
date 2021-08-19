@@ -58,30 +58,16 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public List<ProjectDO> getProjectPage2(int pageNum, String category, String searchContent) {
-        int pageStartIdx = (pageNum-1)*PROJECT_PAGE_SIZE;
-        if (category != null && searchContent != null) {
-            return projectMapper.selectActivePageByCategoryAndTitleLike(pageStartIdx, PROJECT_PAGE_SIZE, category, searchContent);
-        } else if (category != null) {
-            return projectMapper.selectActivePageByCategory(pageStartIdx, PROJECT_PAGE_SIZE, category);
-        } else if (searchContent != null) {
-            return projectMapper.selectActivePageByTitleLike(pageStartIdx, PROJECT_PAGE_SIZE, searchContent);
-        } else {
-            return projectMapper.selectActivePage(pageStartIdx, PROJECT_PAGE_SIZE);
-        }
-    }
-
-    @Override
     public IPage getProjectPage(int pageNum, String category, String searchContent) {
         Page<ProjectDO> page = new Page<>(pageNum,PROJECT_PAGE_SIZE);
         if (category != null && searchContent != null) {
-            return  projectMapper.selectActivePageByPageAndCategoryAndTitleLike(page,category, searchContent);
+            return  projectMapper.selectActivePageByCategoryAndTitleLike(page,category, searchContent);
         } else if (category != null) {
-            return projectMapper.selectActivePageByPageAndCategory(page,category);
+            return projectMapper.selectActivePageByCategory(page,category);
         } else if (searchContent != null) {
-            return projectMapper.selectActivePageByPageAndTitleLike(page,searchContent);
+            return projectMapper.selectActivePageByTitleLike(page,searchContent);
         } else {
-            return projectMapper.selectActivePageByPage(page);
+            return projectMapper.selectActivePage(page);
         }
     }
 
